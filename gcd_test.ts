@@ -15,3 +15,20 @@ Deno.test("Bruch kürzen", () => {
     assertEquals(number.numerator, 2);
     assertEquals(number.denominator, 3);
 });
+
+const gcdTests = [
+    { a: 1, b: 1, gcd: 1 },
+    { a: 1, b: 2, gcd: 1 },
+    { a: 2, b: 2, gcd: 2 },
+    { a: 3, b: 4, gcd: 1 },
+    { a: 6, b: 9, gcd: 3 },
+    { a: 81, b: 36, gcd: 9 },
+];
+
+Deno.test("Grösster Gemeinsamer Teiler (Euklid-Algorithmus)", () => {
+    for (const { a, b, gcd } of gcdTests) {
+        const num = new numbers(a, b);
+        const result = num.gcdEuclid(a, b);
+        assertEquals(result, gcd);
+    }
+});

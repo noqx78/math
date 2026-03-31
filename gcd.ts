@@ -25,8 +25,13 @@ export class numbers {
     }
 
 
-    public gcdEuclid(a: number, b: number) {
-
+    public gcdEuclid(a: number, b: number): number {
+        if (a === b) {
+            return a;
+        }
+        if (a > b) { return this.gcdEuclid(a - b, b); }
+        else {
+        return this.gcdEuclid(a, b - a);}
     }
 
 }
