@@ -3,7 +3,7 @@ import { numbers } from "./gcd.ts"
 
 Deno.test("Grösster Gemeinsamer Teiler", () => {
     const number = new numbers(18, 27);
-    const result = number.gcdBruteForce(number.numerator, number.denominator);
+    const result = number.gcdBruteForce(18, 27);
 
     assertEquals(result, 9);
 });
@@ -31,4 +31,22 @@ Deno.test("Grösster Gemeinsamer Teiler (Euklid-Algorithmus)", () => {
         const result = num.gcdEuclid(a, b);
         assertEquals(result, gcd);
     }
+}); 
+
+Deno.test("Aufgabe 4: Automatische Kürzung", () => {
+    const fraction = new numbers(18, 27);
+    assertEquals(fraction.numerator, 2);
+    assertEquals(fraction.denominator, 3);
+});
+
+Deno.test("Aufgabe 4: Automatische Kürzung - bereits gekürztem Bruch", () => {
+    const fraction = new numbers(2, 3);
+    assertEquals(fraction.numerator, 2);
+    assertEquals(fraction.denominator, 3);
+});
+
+Deno.test("Aufgabe 4: Automatische Kürzung - Bruch mit 1 als Nenner", () => {
+    const fraction = new numbers(5, 1);
+    assertEquals(fraction.numerator, 5);
+    assertEquals(fraction.denominator, 1);
 });

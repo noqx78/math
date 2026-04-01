@@ -3,35 +3,31 @@ export class numbers {
         public numerator: number,
         public denominator: number,
     ) {
-
+        if (denominator === 0) {
+            throw new Error("Denominator cannot be 0");
+        }
+        this.cancel()
     }
 
     public gcdBruteForce(a: number, b: number) {
-        for (let i = a + b; i > 0; i--) {
+        const min = Math.min(a, b);
+        for (let i = min; i >= 1; i--) {
             if (a % i === 0 && b % i === 0) {
                 return i;
             }
         }
+        return 1;
     }
 
     public cancel() {
-        for (let i = this.numerator + this.denominator; i > 0; i--) {
-            if (this.numerator % i === 0 && this.denominator % i === 0) {
-                this.numerator = this.numerator / i
-                this.denominator = this.denominator / i
-                return;
-            }
-        }
+        const gcd = this.gcdBruteForce(this.numerator, this.denominator)
+        this.numerator = this.numerator / gcd
+        this.denominator = this.denominator / gcd
     }
 
-
     public gcdEuclid(a: number, b: number): number {
-        if (a === b) {
-            return a;
-        }
-        if (a > b) { return this.gcdEuclid(a - b, b); }
-        else {
-        return this.gcdEuclid(a, b - a);}
+        if (b === 0) return a;
+        return this.gcdEuclid(b, a % b);
     }
 
 }
